@@ -12,7 +12,7 @@ const reviews = [
     name: "Sarah Mitchell",
     title: "Marketing Executive",
     rating: 5,
-    comment: "The team was incredibly professional and made me feel at ease throughout the entire process. My smile has never looked better, and I genuinely look forward to my visits now.",
+    comment: "The team was incredibly professional and made me feel at ease throughout the entire process. My smile has never looked better!",
     image: patient1,
   },
   {
@@ -36,7 +36,7 @@ const reviews = [
     name: "Michael Nguyen",
     title: "Business Owner",
     rating: 5,
-    comment: "Beautifully designed space and even better service. You can tell they truly care about their patients, and that personal touch makes all the difference.",
+    comment: "Beautifully designed space and even better service. You can tell they truly care about their patients.",
     image: patient4,
   },
   {
@@ -51,12 +51,12 @@ const reviews = [
 
 const StarRating = ({ rating }: { rating: number }) => {
   return (
-    <div className="flex space-x-1 mb-4">
+    <div className="flex space-x-1 mb-3">
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`w-5 h-5 ${
-            i < rating ? 'text-primary fill-current' : 'text-gray-300'
+          className={`w-4 h-4 ${
+            i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
           }`}
         />
       ))}
@@ -66,28 +66,25 @@ const StarRating = ({ rating }: { rating: number }) => {
 
 const ReviewCard = ({ review }: { review: any }) => {
   return (
-    <div className="flex-shrink-0 w-80 bg-white rounded-lg p-6 shadow-lg mx-4">
-      <StarRating rating={review.rating} />
-      
-      <h3 className="text-lg font-semibold text-gray-900 mb-3">
-        {review.comment.split('.')[0]}.
-      </h3>
-      
-      <p className="text-gray-600 text-sm leading-relaxed mb-6">
-        {review.comment}
-      </p>
+    <div className="flex-shrink-0 w-96 h-48 bg-white rounded-xl p-5 shadow-md mx-3 flex flex-col justify-between">
+      <div>
+        <StarRating rating={review.rating} />
+        <p className="text-gray-700 text-sm leading-relaxed mb-4 line-clamp-3">
+          "{review.comment}"
+        </p>
+      </div>
       
       <div className="flex items-center space-x-3">
         <img 
           src={review.image} 
           alt={review.name}
-          className="w-12 h-12 rounded-full object-cover"
+          className="w-10 h-10 rounded-full object-cover"
         />
         <div>
-          <h4 className="font-semibold text-gray-900">
+          <h4 className="font-semibold text-gray-900 text-sm">
             {review.name}
           </h4>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs text-gray-500">
             {review.title}
           </p>
         </div>
@@ -97,11 +94,11 @@ const ReviewCard = ({ review }: { review: any }) => {
 };
 
 const ReviewsSection = () => {
-  // Duplicate reviews for infinite scroll effect
-  const duplicatedReviews = [...reviews, ...reviews, ...reviews];
+  // Create multiple duplicates for smoother infinite scroll
+  const duplicatedReviews = [...reviews, ...reviews, ...reviews, ...reviews, ...reviews];
 
   return (
-    <section className="py-16 md:py-20 bg-primary">
+    <section className="py-16 md:py-20 bg-primary overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16 animate-slide-up">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -109,7 +106,7 @@ const ReviewsSection = () => {
           </h2>
           <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
             Discover how our dental care has empowered individuals to take control of their 
-            health through real stories and experiences. Your journey to better health starts here!
+            health through real stories and experiences.
           </p>
           <button className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors">
             Make an Appointment
@@ -117,8 +114,8 @@ const ReviewsSection = () => {
         </div>
         
         {/* Infinite scrolling container */}
-        <div className="relative overflow-hidden">
-          <div className="flex animate-infinite-scroll">
+        <div className="relative">
+          <div className="flex animate-infinite-scroll-smooth">
             {duplicatedReviews.map((review, index) => (
               <ReviewCard key={`${review.id}-${index}`} review={review} />
             ))}
