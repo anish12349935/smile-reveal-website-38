@@ -5,104 +5,96 @@ import patient2 from '@/assets/patient-2.jpg';
 import patient3 from '@/assets/patient-3.jpg';
 import patient4 from '@/assets/patient-4.jpg';
 import patient5 from '@/assets/patient-5.jpg';
+import { Button } from '@/components/ui/button';
 
 const reviews = [
   {
     id: 1,
     name: "Sarah Mitchell",
     rating: 5,
-    comment: "The team was incredibly professional and made me feel at ease throughout the entire process. My smile has never looked better, and I genuinely look forward to my visits now.",
+    title: "A Lifesaver for My Health",
+    comment: "Dealing with stress, Healthnity's mental health services were a real breakthrough. The guidance I received helped me build and I now feel more in control of my mental wellness. Truly life-changing journey!",
     image: patient1,
-    size: "large"
+    profession: "Yoga Professional"
   },
   {
     id: 2,
     name: "Daniel Lee",
     rating: 5,
-    comment: "From the warm welcome to the expert care, everything was perfect. Highly recommend to anyone looking for a trusted dental clinic.",
+    title: "Truly Transformative Support",
+    comment: "Burnout had left me completely drained, but Healthnity's dedicated care team helped me restore balance and clarity. Their compassionate support and expert guidance made a remarkable difference. I feel stronger, more focused, and truly back on track with my life.",
     image: patient2,
-    size: "medium"
+    profession: "Marketing Executive"
   },
   {
     id: 3,
     name: "Emily Carter",
     rating: 5,
-    comment: "Painless, precise, and professional. Every step was clearly explained, and I've never been more confident about my dental health.",
+    title: "Exactly What I Needed Most",
+    comment: "I was unsure at first, but Healthnity went beyond my expectations. The wellness sessions helped me reconnect with myself and handle daily stress with more ease. It's been a healing, empowering, and genuinely uplifting journey that brought peace and clarity.",
     image: patient3,
-    size: "small"
+    profession: "Freelance Designer"
   },
   {
     id: 4,
     name: "Michael Nguyen",
     rating: 5,
-    comment: "Beautifully designed space and even better service. You can tell they truly care about their patients, and that personal touch makes all the difference.",
+    title: "Transformative Health Experience",
+    comment: "Healthnity's care programs have completely changed the way I approach my health. The tailored support and comprehensive treatments made me feel refreshed and centered. I highly recommend it to anyone seeking better well-being!",
     image: patient4,
-    size: "small"
+    profession: "Fitness Enthusiast"
   },
   {
     id: 5,
     name: "Alex Thompson",
     rating: 5,
-    comment: "Outstanding experience from start to finish. The technology is impressive and the results speak for themselves.",
+    title: "A Lifesaver for Recovery",
+    comment: "As someone struggling with anxiety and sleep issues, I couldn't have asked for better support. The personalized approach and coping skills sessions have been incredibly helpful. I'm truly thankful for the positive changes in my life.",
     image: patient5,
-    size: "tall"
+    profession: "Corporate Manager"
   }
 ];
 
 const StarRating = ({ rating }: { rating: number }) => {
   return (
-    <div className="flex space-x-1">
+    <div className="flex space-x-1 mb-4">
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`w-4 h-4 ${
-            i < rating ? 'text-primary fill-current' : 'text-gray-300'
-          }`}
+          className="w-5 h-5 text-primary fill-current"
         />
       ))}
     </div>
   );
 };
 
-const ReviewCard = ({ review, index }: { review: any; index: number }) => {
-  const getSizeClasses = (size: string) => {
-    switch (size) {
-      case 'large':
-        return 'md:col-span-2 md:row-span-2 h-[280px] md:h-[320px]';
-      case 'tall':
-        return 'md:col-span-1 md:row-span-2 h-[280px] md:h-[320px]';
-      case 'medium':
-        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
-      case 'small':
-        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
-      default:
-        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
-    }
-  };
-
+const ReviewCard = ({ review }: { review: any }) => {
   return (
-    <div 
-      className={`bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift animate-fade-in stagger-animation ${getSizeClasses(review.size)}`}
-      style={{ '--stagger': index } as any}
-    >
-      <div className="flex flex-col h-full">
-        <div className="flex items-start space-x-3 md:space-x-4 mb-3 md:mb-4">
-          <img 
-            src={review.image} 
-            alt={review.name}
-            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-dental-blue-light flex-shrink-0"
-          />
-          <div className="flex-1 min-w-0">
-            <h4 className="font-semibold text-primary text-sm md:text-base mb-1">
-              {review.name}
-            </h4>
-            <StarRating rating={review.rating} />
-          </div>
+    <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+      <StarRating rating={review.rating} />
+      
+      <h3 className="text-lg font-semibold text-foreground mb-3">
+        {review.title}
+      </h3>
+      
+      <p className="text-dental-gray leading-relaxed text-sm mb-6">
+        {review.comment}
+      </p>
+      
+      <div className="flex items-center space-x-3 mt-auto">
+        <img 
+          src={review.image} 
+          alt={review.name}
+          className="w-12 h-12 rounded-full object-cover border-2 border-dental-blue-light"
+        />
+        <div>
+          <h4 className="font-semibold text-primary text-sm">
+            {review.name}
+          </h4>
+          <p className="text-xs text-dental-gray">
+            {review.profession}
+          </p>
         </div>
-        
-        <p className="text-dental-gray leading-relaxed text-xs md:text-sm flex-1">
-          "{review.comment}"
-        </p>
       </div>
     </div>
   );
@@ -110,18 +102,33 @@ const ReviewCard = ({ review, index }: { review: any; index: number }) => {
 
 const ReviewsSection = () => {
   return (
-    <section className="py-16 md:py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12 md:mb-16 animate-slide-up">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-            What our patients<br />say about us
+    <section className="py-16 bg-primary relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 border-2 border-white rounded-full"></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 border-2 border-white rounded-full"></div>
+        <div className="absolute bottom-40 right-1/3 w-24 h-24 border-2 border-white rounded-full"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            What Our Patients Are Saying
           </h2>
+          <p className="text-white/90 max-w-2xl mx-auto mb-8">
+            Discover how Healthnity has empowered individuals to take control of their 
+            health through real stories and experiences. Your journey to better health 
+            starts here!
+          </p>
+          <Button variant="secondary" className="bg-white text-primary hover:bg-white/90">
+            Make an Appointment
+          </Button>
         </div>
         
-        {/* Mobile: Simple single column, Desktop: Masonry Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto auto-rows-min">
-          {reviews.map((review, index) => (
-            <ReviewCard key={review.id} review={review} index={index} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
+          {reviews.map((review) => (
+            <ReviewCard key={review.id} review={review} />
           ))}
         </div>
       </div>
