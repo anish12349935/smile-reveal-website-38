@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
@@ -66,7 +67,7 @@ const BeforeAfterSlider = () => {
 
 const HeroSection = () => {
   return (
-    <section id="home" className="relative h-screen bg-gradient-to-br from-background to-dental-blue-light flex items-center">
+    <section id="home" className="relative h-[800px] bg-gradient-to-br from-background to-dental-blue-light flex items-center">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
