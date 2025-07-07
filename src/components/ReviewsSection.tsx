@@ -10,52 +10,52 @@ const reviews = [
   {
     id: 1,
     name: "Sarah Mitchell",
+    title: "Marketing Executive",
     rating: 5,
     comment: "The team was incredibly professional and made me feel at ease throughout the entire process. My smile has never looked better, and I genuinely look forward to my visits now.",
     image: patient1,
-    size: "large"
   },
   {
     id: 2,
     name: "Daniel Lee",
+    title: "Software Developer",
     rating: 5,
     comment: "From the warm welcome to the expert care, everything was perfect. Highly recommend to anyone looking for a trusted dental clinic.",
     image: patient2,
-    size: "medium"
   },
   {
     id: 3,
     name: "Emily Carter",
+    title: "Graphic Designer",
     rating: 5,
     comment: "Painless, precise, and professional. Every step was clearly explained, and I've never been more confident about my dental health.",
     image: patient3,
-    size: "small"
   },
   {
     id: 4,
     name: "Michael Nguyen",
+    title: "Business Owner",
     rating: 5,
     comment: "Beautifully designed space and even better service. You can tell they truly care about their patients, and that personal touch makes all the difference.",
     image: patient4,
-    size: "small"
   },
   {
     id: 5,
     name: "Alex Thompson",
+    title: "Project Manager",
     rating: 5,
     comment: "Outstanding experience from start to finish. The technology is impressive and the results speak for themselves.",
     image: patient5,
-    size: "tall"
   }
 ];
 
 const StarRating = ({ rating }: { rating: number }) => {
   return (
-    <div className="flex space-x-1">
+    <div className="flex space-x-1 mb-4">
       {[...Array(5)].map((_, i) => (
         <Star
           key={i}
-          className={`w-4 h-4 ${
+          className={`w-5 h-5 ${
             i < rating ? 'text-primary fill-current' : 'text-gray-300'
           }`}
         />
@@ -64,65 +64,65 @@ const StarRating = ({ rating }: { rating: number }) => {
   );
 };
 
-const ReviewCard = ({ review, index }: { review: any; index: number }) => {
-  const getSizeClasses = (size: string) => {
-    switch (size) {
-      case 'large':
-        return 'md:col-span-2 md:row-span-2 h-[280px] md:h-[320px]';
-      case 'tall':
-        return 'md:col-span-1 md:row-span-2 h-[280px] md:h-[320px]';
-      case 'medium':
-        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
-      case 'small':
-        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
-      default:
-        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
-    }
-  };
-
+const ReviewCard = ({ review }: { review: any }) => {
   return (
-    <div 
-      className={`bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift animate-fade-in stagger-animation ${getSizeClasses(review.size)}`}
-      style={{ '--stagger': index } as any}
-    >
-      <div className="flex flex-col h-full">
-        <div className="flex items-start space-x-3 md:space-x-4 mb-3 md:mb-4">
-          <img 
-            src={review.image} 
-            alt={review.name}
-            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-dental-blue-light flex-shrink-0"
-          />
-          <div className="flex-1 min-w-0">
-            <h4 className="font-semibold text-primary text-sm md:text-base mb-1">
-              {review.name}
-            </h4>
-            <StarRating rating={review.rating} />
-          </div>
+    <div className="flex-shrink-0 w-80 bg-white rounded-lg p-6 shadow-lg mx-4">
+      <StarRating rating={review.rating} />
+      
+      <h3 className="text-lg font-semibold text-gray-900 mb-3">
+        {review.comment.split('.')[0]}.
+      </h3>
+      
+      <p className="text-gray-600 text-sm leading-relaxed mb-6">
+        {review.comment}
+      </p>
+      
+      <div className="flex items-center space-x-3">
+        <img 
+          src={review.image} 
+          alt={review.name}
+          className="w-12 h-12 rounded-full object-cover"
+        />
+        <div>
+          <h4 className="font-semibold text-gray-900">
+            {review.name}
+          </h4>
+          <p className="text-sm text-gray-500">
+            {review.title}
+          </p>
         </div>
-        
-        <p className="text-dental-gray leading-relaxed text-xs md:text-sm flex-1">
-          "{review.comment}"
-        </p>
       </div>
     </div>
   );
 };
 
 const ReviewsSection = () => {
+  // Duplicate reviews for infinite scroll effect
+  const duplicatedReviews = [...reviews, ...reviews, ...reviews];
+
   return (
-    <section className="py-16 md:py-20 bg-background">
+    <section className="py-16 md:py-20 bg-primary">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 md:mb-16 animate-slide-up">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-            What our patients<br />say about us
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            What Our Patients Are Saying
           </h2>
+          <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
+            Discover how our dental care has empowered individuals to take control of their 
+            health through real stories and experiences. Your journey to better health starts here!
+          </p>
+          <button className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors">
+            Make an Appointment
+          </button>
         </div>
         
-        {/* Mobile: Simple single column, Desktop: Masonry Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto auto-rows-min">
-          {reviews.map((review, index) => (
-            <ReviewCard key={review.id} review={review} index={index} />
-          ))}
+        {/* Infinite scrolling container */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-infinite-scroll">
+            {duplicatedReviews.map((review, index) => (
+              <ReviewCard key={`${review.id}-${index}`} review={review} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
