@@ -1,7 +1,14 @@
+
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import beforeTeeth from '@/assets/before-teeth.jpg';
 import afterTeeth from '@/assets/after-teeth.jpg';
+import patient1 from '@/assets/patient-1.jpg';
+import patient2 from '@/assets/patient-2.jpg';
+import patient3 from '@/assets/patient-3.jpg';
+import patient4 from '@/assets/patient-4.jpg';
+import patient5 from '@/assets/patient-5.jpg';
+import dentalHero from '@/assets/dental-hero.jpg';
 
 const beforeAfterCases = [
   {
@@ -13,36 +20,36 @@ const beforeAfterCases = [
   },
   {
     id: 2,
-    beforeImage: beforeTeeth,
-    afterImage: afterTeeth,
+    beforeImage: patient1,
+    afterImage: patient2,
     title: "Orthodontic Treatment",
     description: "Straightened teeth with invisible aligners"
   },
   {
     id: 3,
-    beforeImage: beforeTeeth,
-    afterImage: afterTeeth,
+    beforeImage: patient3,
+    afterImage: patient4,
     title: "Dental Implants",
     description: "Replaced missing teeth with natural-looking implants"
   },
   {
     id: 4,
-    beforeImage: beforeTeeth,
-    afterImage: afterTeeth,
+    beforeImage: patient5,
+    afterImage: dentalHero,
     title: "Teeth Whitening",
     description: "Professional whitening for a brighter smile"
   },
   {
     id: 5,
-    beforeImage: beforeTeeth,
-    afterImage: afterTeeth,
+    beforeImage: dentalHero,
+    afterImage: patient1,
     title: "Gum Contouring",
     description: "Reshaped gums for a more balanced smile"
   },
   {
     id: 6,
-    beforeImage: beforeTeeth,
-    afterImage: afterTeeth,
+    beforeImage: patient2,
+    afterImage: patient3,
     title: "Full Reconstruction",
     description: "Complete dental restoration for optimal function"
   }

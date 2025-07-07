@@ -68,39 +68,39 @@ const ReviewCard = ({ review, index }: { review: any; index: number }) => {
   const getSizeClasses = (size: string) => {
     switch (size) {
       case 'large':
-        return 'col-span-2 row-span-2 h-[320px]';
+        return 'md:col-span-2 md:row-span-2 h-[280px] md:h-[320px]';
       case 'tall':
-        return 'col-span-1 row-span-2 h-[320px]';
+        return 'md:col-span-1 md:row-span-2 h-[280px] md:h-[320px]';
       case 'medium':
-        return 'col-span-1 row-span-1 h-[200px]';
+        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
       case 'small':
-        return 'col-span-1 row-span-1 h-[200px]';
+        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
       default:
-        return 'col-span-1 row-span-1 h-[200px]';
+        return 'md:col-span-1 md:row-span-1 h-[240px] md:h-[200px]';
     }
   };
 
   return (
     <div 
-      className={`bg-white rounded-xl p-6 shadow-lg hover-lift animate-fade-in stagger-animation ${getSizeClasses(review.size)}`}
+      className={`bg-white rounded-xl p-4 md:p-6 shadow-lg hover-lift animate-fade-in stagger-animation ${getSizeClasses(review.size)}`}
       style={{ '--stagger': index } as any}
     >
       <div className="flex flex-col h-full">
-        <div className="flex items-start space-x-4 mb-4">
+        <div className="flex items-start space-x-3 md:space-x-4 mb-3 md:mb-4">
           <img 
             src={review.image} 
             alt={review.name}
-            className="w-12 h-12 rounded-full object-cover border-2 border-dental-blue-light flex-shrink-0"
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-dental-blue-light flex-shrink-0"
           />
           <div className="flex-1 min-w-0">
-            <h4 className="font-semibold text-primary text-base mb-1">
+            <h4 className="font-semibold text-primary text-sm md:text-base mb-1">
               {review.name}
             </h4>
             <StarRating rating={review.rating} />
           </div>
         </div>
         
-        <p className="text-dental-gray leading-relaxed text-sm flex-1">
+        <p className="text-dental-gray leading-relaxed text-xs md:text-sm flex-1">
           "{review.comment}"
         </p>
       </div>
@@ -110,16 +110,16 @@ const ReviewCard = ({ review, index }: { review: any; index: number }) => {
 
 const ReviewsSection = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-16 md:py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-4">
+        <div className="text-center mb-12 md:mb-16 animate-slide-up">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
             What our patients<br />say about us
           </h2>
         </div>
         
-        {/* Masonry Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto auto-rows-min">
+        {/* Mobile: Simple single column, Desktop: Masonry Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto auto-rows-min">
           {reviews.map((review, index) => (
             <ReviewCard key={review.id} review={review} index={index} />
           ))}
