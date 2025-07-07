@@ -122,10 +122,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    background-image: 
-      radial-gradient(circle at 20% 80%, hsl(var(--dental-blue-light) / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, hsl(var(--dental-blue-light) / 0.03) 0%, transparent 50%);
   }
 }
 

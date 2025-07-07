@@ -1,4 +1,3 @@
-
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ReviewsSection from '@/components/ReviewsSection';
@@ -8,31 +7,18 @@ import ContactForm from '@/components/ContactForm';
 import BeforeAfterSection from '@/components/BeforeAfterSection';
 import TeamSection from '@/components/TeamSection';
 import Footer from '@/components/Footer';
-import DecorativeBackground from '@/components/DecorativeBackground';
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen">
       <Navbar />
       <HeroSection />
       <ReviewsSection />
-      <div className="relative">
-        <DecorativeBackground variant="subtle" />
-        <FAQSection />
-      </div>
-      <div className="relative">
-        <DecorativeBackground variant="subtle" />
-        <FeaturesSection />
-      </div>
+      <FAQSection />
+      <FeaturesSection />
       <ContactForm />
-      <div className="relative">
-        <DecorativeBackground variant="subtle" />
-        <BeforeAfterSection />
-      </div>
-      <div className="relative">
-        <DecorativeBackground variant="subtle" />
-        <TeamSection />
-      </div>
+      <BeforeAfterSection />
+      <TeamSection />
       <Footer />
     </div>
   );
